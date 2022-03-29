@@ -19,43 +19,42 @@
                         <h4>Thêm đơn hàng</h4>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="">Chọn bàn</label>
-                            <select name="user_id" class="select2 form-control" required
-                                data-parsley-required-message="Trường này không được bỏ trống.">
-                                <option value="">Vui lòng chọn bàn</option>
-                                @foreach($users as $value)
-                                <option value="{{ $value->id }}">{{ $value->fullname }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-10">
-                                <select name="product[]" data-route="{{ route('get.product.order') }}" data-preview="table.product-order tbody" class="form-control select2" data-placeholder="---Chọn món ăn---"
-                                    multiple required data-parsley-required-message="Trường này không được bỏ trống.">
-                                    <option value="">---Chọn món ăn---</option>
-                                    @foreach($products as $value)
-                                    <option value="{{$value->id}}">{{$value->name}}</option>
+                        <div class="row">
+                            <div class="col-12 col-md-9 form-group">
+                                <label for="">Chọn bàn</label>
+                                <select name="user_id" class="select2 form-control" required
+                                    data-parsley-required-message="Trường này không được bỏ trống.">
+                                    <option value="">Vui lòng chọn bàn</option>
+                                    @foreach($users as $value)
+                                    <option value="{{ $value->id }}">{{ $value->fullname }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-2 text-right">
-                                <button class="btn btn-primary" type="button" id="choosProduct" data-target="select[name='product[]']">Chọn</button>
+                            <div class="col-12 col-md-3 form-group">
+                                <label for="">Trạng thái</label>
+                                <select name="status" class="form-control" required
+                                    data-parsley-required-message="Trường này không được bỏ trống.">
+                                    <option value="0">Chưa xử lý</option>
+                                    <option value="1">Đang xử lý</option>
+                                    <option value="2">Hoàn thành</option>
+                                </select>
                             </div>
                         </div>
 
                         <table class="product-order table table-bordered">
                             <thead>
                                 <tr>
+                                    <th scope="col"></th>
                                     <th scope="col">Tên món ăn</th>
-                                    <th scope="col">Số lượng</th>
-                                    <th scope="col">Giá tiền</th>
-                                    <th scope="col">đơn vị</th>
+                                    <th scope="col" style="width:100px">Số lượng</th>
+                                    <th scope="col" style="width:200px">Giá tiền</th>
+                                    <th scope="col" style="width:75px">đơn vị</th>
                                     <th scope="col">Tổng tiền</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr class="default">
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -65,7 +64,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="4">Tổng cộng</th>
+                                    <th colspan="5">Tổng cộng</th>
                                     <th class="total-order">0đ</th>
                                 </tr>
                             </tfoot>
@@ -80,7 +79,30 @@
                         <button type="submit" class="btn btn-primary btn-block">Thêm</button>
                     </div>
                 </div>
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h4>Danh sách món ăn</h4>
+                    </div>
+                    <div class="card-body">
+                        <input type="text" id="search" class="form-control mb-1" data-target=".product-check"
+                            placeholder="Tìm kiếm món ăn...">
+                        <div class="radio_scroll form-group">
+                            @foreach($products as $value)
+                            <div class="form-check product-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="product[]"
+                                        value="{{ $value->id }}">{{ $value->name }}
+                                </label>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="button" id="choosProduct"
+                        data-target="input[name='product[]']" data-route="{{ route('get.product.order') }}"
+                        data-preview="table.product-order tbody">Chọn</button>
+                </div>
             </div>
+
         </div>
     </form>
 </div>

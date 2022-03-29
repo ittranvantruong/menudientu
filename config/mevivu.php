@@ -22,5 +22,12 @@ return [
         'pcs' => 'Pcs',
         'pc' => 'Pc'
     ],
-    'default-password' => '@user@123'
+    'default-password' => '@user@123',
+    'order' => [
+        'status' => [
+            '0' => 'Chưa xử lý',
+            '1' => 'Đang xử lý',
+            '2' => 'Hoàn thành',
+        ],
+    ]
 ];

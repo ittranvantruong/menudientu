@@ -54,6 +54,13 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('get-product', [OrderController::class, 'getProduct'])->name('get.product.order');
         Route::get('/them', [OrderController::class, 'create'])->name('create.order');
         Route::post('/them', [OrderController::class, 'store'])->name('store.order');
+
+        Route::get('/sua/{order:id}', [OrderController::class, 'edit'])->name('edit.order');
+        Route::put('/sua', [OrderController::class, 'update'])->name('update.order');
+        Route::patch('/sua-trang-thai/{order:id}/{status}', [OrderController::class, 'updateStatus'])->name('update.order.status');
+        Route::delete('/xoa/{order:id}', [OrderController::class, 'delete'])->name('delete.order');
+
+
     });
 
     //thêm thành viên

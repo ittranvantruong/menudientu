@@ -17,6 +17,7 @@ class CreateOrderTable extends Migration
             $table->integer('id')->autoIncrement();
             $table->integer('user_id')->nullable();
             $table->double('total')->nullable();
+            $table->tinyInteger('status')->defaultValue('0');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('SET NULL');
         });

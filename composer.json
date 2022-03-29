@@ -11,6 +11,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "olimortimer/laravelshoppingcart": "^5.0",
         "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {

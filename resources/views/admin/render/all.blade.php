@@ -22,6 +22,7 @@
 @endif
 @if($type == 'addProductOrder'  && isset($item))
 <tr>
+    <td><i class="remove-product-order pointer fas fa-times-circle"></i></td>
     <td>
         {{ $item->name }}
         <input type="hidden" name="product_id[]" value="{{ $item->id }}">
@@ -31,9 +32,9 @@
     </td>
     <td>
         <select name="price[]" class="form-control">
-            <option value="{{ $item->price }}">Thường - {{ number_format($item->price) }}đ</option>
+            <option value="{{ $item->price }}">M - {{ number_format($item->price) }}đ</option>
             @if($item->price_large != null && $item->price_large != '')
-                <option value="{{ $item->price_large }}">Lớn - {{ number_format($item->price_large) }}đ</option>
+                <option value="{{ $item->price_large }}">L - {{ number_format($item->price_large) }}đ</option>
             @endif
         </select>
     </td>

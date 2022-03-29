@@ -3,6 +3,7 @@
 namespace App\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class OrderRequest extends FormRequest
 {
@@ -23,17 +24,29 @@ class OrderRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-            'user_id' => ['required', 'exists:App\Models\User,id'],
-            'product' => ['required'],
-        ];
+        if($this->method() == 'POST'){
+            return [
+                //
+                'user_id' => ['required', 'exists:App\Models\User,id'],
+                'status' => ['required', 'in:0,1,2'],
+                'product_id' => ['required'],
+                'quantity' => ['required'],
+                'price' => ['required'],
+            ];
+        }else{
+            return [
+                'id' => ['required', 'exists:App\Models\Order,id'],
+                'user_id' => 'required',
+                'status' => 'required'
+            ];
+        }
+        
     }
 
     public function attributes() {
         return [
             'user_id' => 'Bàn',
-            'product' => 'Món ăn',
+            'product_id' => 'Món ăn',
         ];
     }
 
@@ -41,7 +54,7 @@ class OrderRequest extends FormRequest
         return [
             'user_id.required' => ':attribute không được để trống',
             'user_id.exists' => ':attribute không tồn tại',
-            'product.required' => ':attribute chưa chọn',
+            'product_id.required' => ':attribute chưa chọn',
         ];
     }
 }
