@@ -31,7 +31,20 @@
 
     <script src="{{ asset('public/lib/jquery-toast-plugin/jquery.toast.min.js') }}"></script>
     <script src="{{ asset('public/lib/Parsley.js-2.9.2/parsley.min.js') }}"></script>
-
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
+<script>
 
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
+      cluster: "{{ env('PUSHER_APP_CLUSTER') }}"
+    });
+
+    // var channel = pusher.subscribe('userOrderChannel');
+    // channel.bind('userOrderEvent', function(data) {
+    //   alert(JSON.stringify(data));
+    // });
+  </script>
 <body id="page-top">

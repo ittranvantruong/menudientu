@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Admin\Http\Requests\OrderRequest;
+use App\Admin\Http\Controllers\AdminRealtimeController;
 
 class OrderController extends Controller
 {
@@ -21,7 +22,8 @@ class OrderController extends Controller
             return Order::select('id', 'user_id', 'status', 'total')->with(['user:id,fullname', 'details:order_id,name,option,quantity'])->orderBy('id', 'DESC')->get();
         });
         $status = orderStatus($request->status);
-        return view('admin.order.index', compact('orders', 'status'));
+        $class = orderStatusClass($request->status);
+        return view('admin.order.index', compact('orders', 'status', 'class'));
     }
 
     public function create(){
@@ -59,9 +61,18 @@ class OrderController extends Controller
         return redirect()->route('edit.order', $order->id)->with('success', 'Tạo đơn hàng thành công');
     }
     public function update(OrderRequest $request){
+
         $order = Order::find($request->id);
+        $order_status = $order->status;
         $data = $request->only('user_id', 'status');
+
         $order->update($data);
+        if($order_status != $data['status']){
+
+            $order = $order->load(['details:order_id,name,price,option,quantity,quantity_item,unit']);
+            (new AdminRealtimeController)->changeStatusOrder($data['status'], $order_status, $order);
+        }
+
         return back()->with('success', 'Cập nhật thành công');
     }
 
@@ -69,7 +80,16 @@ class OrderController extends Controller
         if(!in_array($status, [0,1,2])){
             return back()->with('error', 'Cập nhật không thành công');
         }
+
+        $order_status = $order->status;
         $order->update(['status' => $status]);
+
+        if($order_status != $data['status']){
+
+            $order = $order->load(['details:order_id,name,price,option,quantity,quantity_item,unit']);
+            (new AdminRealtimeController)->changeStatusOrder($status, $order_status, $order);
+        }
+        
         return back()->with('success', 'Cập nhật thành công');
     }
 

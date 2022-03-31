@@ -8,7 +8,6 @@
 @endpush
 @section('content')
 <div class="container-fluid">
-
     <div class="card shadow mb-4">
         <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="font-weight-bold text-primary mb-0">Danh sách đơn hàng {{ $status }}</h6>
@@ -19,7 +18,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
+                <table class="table table-bordered {{ $class }}" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Tên bàn</th>
@@ -32,7 +31,7 @@
 
                     <tbody>
                         @foreach ($orders as $item)
-                        <tr>
+                        <tr class="item-{{$item->id}}">
                             <td>{{optional($item->user)->fullname}}</td>
                             <td>
                                 @foreach ($item->details as $detail)
@@ -68,6 +67,7 @@
     @csrf
     @method('PATCH')
 </form>
+
 @endsection
 
 @push('plugin-js')
@@ -81,8 +81,20 @@
 @push('js')
 
 <script>
-    $(document).ready(function () {
-        customDatatable('.table', [2]);
+    var channel = pusher.subscribe('OrderChangeStatusChannel');
+    channel.bind('OrderChangeStatusEvent', function(data) {
+        var data_new = data.msg.new, data_old = data.msg.old;
+        $("table." + data_new.class + " tbody").prepend(data_new.html);
+        $("table." + data_old.class + " tbody tr." + data_old.item).remove();
+        if(data_new.class == '{{ config('mevivu.order.class')[0] }}'){
+            
+            $.toast({
+                heading: 'Khách gọi',
+                text: 'Tiếp nhập yêu cầu <a onClick="pauseAudio();" href="#">Tiếp nhận</a>.',
+                hideAfter: false,
+                icon: 'warning'
+            });
+        }
     });
 </script>
 

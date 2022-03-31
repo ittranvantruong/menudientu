@@ -62,6 +62,15 @@ if (!function_exists('orderStatus')) {
 
     }
 }
+if (!function_exists('orderStatusClass')) {
+    function orderStatusClass($value){
+        if(isset($value) && ($value || $value == 0)){
+            return config('mevivu.order.class')[$value];
+        }
+        return 'allRender';
+
+    }
+}
 if (!function_exists('getPriceMinMax')) {
     function getPriceMinMax($price, $data, $option = 'html'){
         $collect = collect();

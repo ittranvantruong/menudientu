@@ -7,6 +7,7 @@ use App\Admin\Http\Controllers\CategoryController;
 use App\Admin\Http\Controllers\ProductController;
 use App\Admin\Http\Controllers\OrderController;
 use App\Admin\Http\Controllers\UserController;
+use App\Http\Controllers\RealtimeController;
 
 /*
 |--------------------------------------------------------------------------

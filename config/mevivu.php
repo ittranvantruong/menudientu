@@ -29,5 +29,8 @@ return [
             '1' => 'Đang xử lý',
             '2' => 'Hoàn thành',
         ],
+        'class' => [
+            'pending', 'processing', 'success'
+        ],
     ]
 ];
