@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -13,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('admins')->insert([
+        DB::table('users')->insert([
             'name' => 'B01',
             'fullname' => 'Bàn 01',
             'role' => 'CUSTOMTER',

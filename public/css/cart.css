@@ -1,0 +1,75 @@
+.container{
+    background-color: rgb(173, 171, 171);
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    padding: 0px;
+    width: 100%;
+}
+.head{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    padding: 20px 10px 20px 10px;
+    z-index: 2;
+}
+.head>.backward-button{
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    background-color: rgb(173, 171, 171);
+    border-radius: 5px;
+    color: rgb(23, 136, 8);
+}
+.head>.list{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 120%;
+}
+.head>.delete-all-button{
+    display: flex;
+    justify-content: end;
+}
+.head>.delete-all-button>button{
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(23, 136, 8);
+    background-color: white;
+    color: rgb(23, 136, 8);
+}
+.menu{
+    margin: 70px 0px 50px 0px;
+}
+.items{}
+.item{
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+    height: 100px;
+}
+.item>.pic>img {
+    width: 110%;
+    height: 80px;
+    margin: 10px 0px 0px 0px;
+}
+.item>.text{
+    padding-top: 5px;
+    line-height: 2em;
+}
+.item>.text>.food-name{
+    font-weight: bold;
+}
+.delete{
+    padding-top: 10px;
+}
+.confirm-button{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding-top: 10px;
+}

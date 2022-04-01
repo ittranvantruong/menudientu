@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RealtimeController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('goi-nhan-vien', [RealtimeController::class, 'callEmployee']);
+Route::get('/', [HomeController::class, 'index'])->name('index.customer');
+Route::get('cart', [HomeController::class, 'cart'])->name('cart.customer');
