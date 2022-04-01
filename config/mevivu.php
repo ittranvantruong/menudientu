@@ -32,5 +32,6 @@ return [
         'class' => [
             'pending', 'processing', 'success'
         ],
-    ]
+    ],
+    'audio' => '/public/audio/bell.mp3',
 ];

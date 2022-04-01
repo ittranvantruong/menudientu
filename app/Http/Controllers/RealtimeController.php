@@ -4,16 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events\UserOrderEvent;
+use App\Events\CallEmployeeEvent;
 
 class RealtimeController extends Controller
 {
     //
-    public function listen(){
-        $arr =array(
-            'msg' => 'Hello World',
-            'name' => 'Mevivu'
+    public function addNewOrder($msg = 'Có 1 đơn hàng mới', $order){
+        $html = view('admin.order.render.realtime')->with('item', $order)->render();
+        $link = route('edit.order', $order->id);
+        $class = orderStatusClass($order->status);
+        $array =array(
+            'msg' => $msg,
+            'class' => $class,
+            'html' => $html,
+            'link' => $link
         );
         // return $arr;
-        return event(new UserOrderEvent($arr));
+        return event(new UserOrderEvent($array));
+    }
+
+    public function callEmployee(){
+        $array =array(
+            'msg' => 'Khách bàn 01 gọi',
+            'text' => 'Tiếp nhận yêu cầu <a href="javascript:void(0)" class="close-jq-toast-single close-jq-toast-single-custom" onclick="pausedAudio();">Tiếp nhận</a>',
+        );
+        return event(new CallEmployeeEvent($array));
     }
 }

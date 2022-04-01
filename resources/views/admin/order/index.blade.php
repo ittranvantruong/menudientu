@@ -81,20 +81,21 @@
 @push('js')
 
 <script>
+    $(document).ready(function (){
+        customDatatable('table', [4]);
+    });
     var channel = pusher.subscribe('OrderChangeStatusChannel');
     channel.bind('OrderChangeStatusEvent', function(data) {
         var data_new = data.msg.new, data_old = data.msg.old;
         $("table." + data_new.class + " tbody").prepend(data_new.html);
         $("table." + data_old.class + " tbody tr." + data_old.item).remove();
-        if(data_new.class == '{{ config('mevivu.order.class')[0] }}'){
-            
-            $.toast({
-                heading: 'Khách gọi',
-                text: 'Tiếp nhập yêu cầu <a onClick="pauseAudio();" href="#">Tiếp nhận</a>.',
-                hideAfter: false,
-                icon: 'warning'
-            });
-        }
+    });
+
+    var channel = pusher.subscribe('userOrderChannel');
+    channel.bind('userOrderEvent', function(data) {
+        var data = data.msg;
+        $("table." + data.class + " tbody").prepend(data.html);
+        $("table.allRender tbody").prepend(data.html);
     });
 </script>
 

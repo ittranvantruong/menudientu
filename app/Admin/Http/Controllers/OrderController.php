@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Admin\Http\Requests\OrderRequest;
 use App\Admin\Http\Controllers\AdminRealtimeController;
+use App\Http\Controllers\RealtimeController;
 
 class OrderController extends Controller
 {
@@ -58,6 +59,11 @@ class OrderController extends Controller
             $total += (isset($data['price'][$key]) ? $data['price'][$key] : $product->price) * (isset($data['quantity'][$key]) ? $data['quantity'][$key] : 1);
         }
         $order->update(['total' => $total]);
+        
+        $order = $order->load(['details:order_id,name,price,option,quantity,quantity_item,unit']);
+
+        (new RealtimeController)->addNewOrder('Có 1 đơn hàng mới được thêm từ nhân viên', $order);
+
         return redirect()->route('edit.order', $order->id)->with('success', 'Tạo đơn hàng thành công');
     }
     public function update(OrderRequest $request){

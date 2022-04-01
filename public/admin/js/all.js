@@ -109,8 +109,25 @@ $(document).ready(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+    //setting tiếng thông báo
+    if (sessionStorage.getItem("bell") === null) {
+        $("#modalCallBell").modal("show");
+    }
+    $("#hasCallBell").click(function() {
+        $("#modalCallBell").modal("hide");
+        pausedAudio();
+    });
     // $("textarea.ckeditor").ckeditor();
+    $('#modalCallBell').on('hide.bs.modal', function (event) {
+        // do something...
+        sessionStorage.setItem("bell", true);
+    });
 
+});
+
+//tắt tiếng chuông
+$(document).on('click', '.close-jq-toast-single', function () {
+    pausedAudio();
 });
 // Hiện popup
 $(document).on('click', '.open-modal', function () {

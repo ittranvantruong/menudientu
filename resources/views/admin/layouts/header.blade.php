@@ -33,8 +33,39 @@
     <script src="{{ asset('public/lib/Parsley.js-2.9.2/parsley.min.js') }}"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
+<style>
+    .close-jq-toast-single-custom{
+        position: unset !important;
+    }
+</style>
 <script>
+    	var x = new Audio('{{ asset(config("mevivu.audio")) }}');
+        function playAudio() {
+            // Show loading animation.
+            var playPromise = x.play();
 
+            if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                    x.play();
+                })
+                .catch(error => {
+                });
+
+            }
+        }
+        function pausedAudio() {
+            // Show loading animation.
+            var playPromise = x.pause();
+
+            if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                x.pause();
+            })
+            .catch(error => {
+            });
+            }
+        }
+    
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
 
@@ -42,9 +73,30 @@
       cluster: "{{ env('PUSHER_APP_CLUSTER') }}"
     });
 
-    // var channel = pusher.subscribe('userOrderChannel');
-    // channel.bind('userOrderEvent', function(data) {
-    //   alert(JSON.stringify(data));
-    // });
+    var channel = pusher.subscribe('userOrderChannel');
+    channel.bind('userOrderEvent', function(data) {
+        var data = data.msg;
+        $.toast({
+            heading: data.msg,
+            text: 'Truy cập <a href="'+data.link+'">Đơn hàng ngay</a>.',
+            position: 'bottom-right',
+            hideAfter: false,
+            icon: 'warning'
+        });
+    });
+
+    var channel2 = pusher.subscribe('callEmployeeChannel');
+    channel2.bind('callEmployeeEvent', function(data) {
+        var data = data.msg;
+        $.toast({
+            heading: data.msg,
+            text: data.text,
+            position: 'bottom-left',
+            hideAfter: false,
+            icon: 'error'
+        });
+        playAudio();
+    });
+
   </script>
 <body id="page-top">

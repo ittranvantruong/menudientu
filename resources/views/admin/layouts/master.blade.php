@@ -8,4 +8,6 @@
 
 @yield('content')
 
+@include('admin.layouts.modal')
+
 @include('admin.layouts.footer')
