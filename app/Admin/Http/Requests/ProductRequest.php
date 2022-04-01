@@ -36,7 +36,7 @@ class ProductRequest extends FormRequest
             ];
         }else{
             return [
-                'id' => ['required', 'exists:App\Models\Category,id'],
+                'id' => ['required', 'exists:App\Models\Product,id'],
                 'name' => ['required', 'max:255'],
                 'status' => ['required', 'in:0,1'],
                 'price' => ['required', 'numeric'],
