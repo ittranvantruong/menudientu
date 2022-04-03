@@ -25,9 +25,10 @@ class RealtimeController extends Controller
 
     public function callEmployee(){
         $array =array(
-            'msg' => 'Khách bàn 01 gọi',
+            'msg' => 'Khách gọi từ '.auth()->user()->fullname,
             'text' => 'Tiếp nhận yêu cầu <a href="javascript:void(0)" class="close-jq-toast-single close-jq-toast-single-custom" onclick="pausedAudio();">Tiếp nhận</a>',
         );
-        return event(new CallEmployeeEvent($array));
+        event(new CallEmployeeEvent($array));
+        return true;
     }
 }

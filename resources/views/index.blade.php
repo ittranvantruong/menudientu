@@ -5,25 +5,18 @@
 
 @endpush
 
-@section('title', 'Menu')
+@section('title', 'Đặt món ngay')
 @section('content')
 
-<div class="container-fluid">
-    <div class="row no-gutters head">
-        <div class="col-10 col-sm-10" style="font-weight:bold;font-size: 120%;color: white;">Bàn 1</div>
-        <div class="col-1 col-sm-1 fa5 d-flex justify-content-end" >
-            <a href="{{ route('cart.customer') }}" style="color: white">
-                <i class="fas fa-shopping-cart" href="{{ route('cart.customer') }}"></i>
-            </a>
+<div class="container">
+    <div class="row no-gutters header">
+        <div class="col-10 col-sm-10">
+            <h3 class="text-white font-weight-bold mb-0">{{ auth()->user()->fullname }}</h3>
         </div>
-    </div>
-    <div class="row no-gutters search-bar d-flex justify-content-center">
-        <div class="input-group">
-            <span class="input-group-text" style="background-color: white;" >
-                <i class="fas fa-search" ></i>
-            </span>
-            <input type="search" class="form-control rounded" placeholder="Tìm kiếm" aria-label="Search"
-                aria-describedby="search-addon" />
+        <div class="col-2 text-right" >
+            <a href="{{ route('index.cart') }}" class="text-white cart">
+                <i class="fas fa-shopping-cart"></i><span data-count={{ Cart::getTotalQuantity() }} class="badge badge-light">{{ Cart::getTotalQuantity() }}</span>
+            </a>
         </div>
     </div>
     <div class="row no-gutters menu">

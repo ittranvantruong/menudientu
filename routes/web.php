@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +17,26 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('dang-nhap', function(){
+    return 'Vui lòng quét mã QRCODE';
+})->name('login');
 
-Route::get('goi-nhan-vien', [RealtimeController::class, 'callEmployee']);
-Route::get('/', [HomeController::class, 'index'])->name('index.customer');
-Route::get('cart', [HomeController::class, 'cart'])->name('cart.customer');
+Route::get('dang-nhap/{name}', [HomeController::class, 'userLogin'])->name('user.login');
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::post('goi-nhan-vien', [RealtimeController::class, 'callEmployee'])->name('call.employee');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::prefix('gio-hang')->group(function () {
+        Route::get('lay-thong-tin-mon-an/{product:id}', [ShoppingCartController::class, 'getProduct'])->name('get.product.cart');
+        Route::get('/', [ShoppingCartController::class, 'index'])->name('index.cart');
+        Route::post('/them', [ShoppingCartController::class, 'store'])->name('store.cart');
+        Route::put('/sua', [ShoppingCartController::class, 'update'])->name('update.cart');
+        Route::delete('/xoa/{cart}', [ShoppingCartController::class, 'delete'])->name('delete.cart');
+    });
+    Route::prefix('dat-mon')->group(function () {
+
+        Route::post('/them', [OrderController::class, 'store'])->name('store.order.user');
+
+    });
+});

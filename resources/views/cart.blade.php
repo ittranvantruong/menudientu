@@ -1,79 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href=" {{asset('public/css/cart.css')}} " />
-    <title>Giỏ hàng</title>
-</head>
-<body>
+@extends('layouts.master')
+@push('css')
+
+<link rel="stylesheet" href=" {{asset('public/css/cart.css')}} " />
+
+@endpush
+
+@section('title', 'Đặt món ngay')
+@section('content')
+<div class="head shadow d-flex">
     <div class="container">
-        <div class="row no-gutters head">
-            <div class="col-1 col-sm-1 backward-button">
-                <i class="fas fa-angle-left"></i>
-            </div>
-            <div class="col-9 col-sm-9 list ">Danh sách món đã chọn</div>
-            <div class="col-2 col-sm-2 delete-all-button">
-                <button type="" >Xóa giỏ</button>
-            </div>
-        </div>
-        <div class="row no-gutters menu">
-            <div class="col-12 col-sm-12 items">
-                <div class="row item">
-                    <div class="col-3 col-sm-3 pic">
-                        <img src="D:/pic/ui/goiCuonBoPia.JPG">
-                    </div>
-                    <div class="col-7 col-sm-7 text">
-                        <div class="row food-name">
-                            <div class="col-12 col-sm-12"> 1x Gỏi Cuốn Bò Pía</div>
-                        </div>
-                        <div class="row price">
-                            <div class="col-12 col-sm-12">150.000 VND</div>
-                        </div>
-                    </div>
-                    <div class="col-2 col-sm-2 delete-button">
-                        <div class="row delete">
-                            <div class="col-12 col-sm-12">
-                                <button value="" style="
-                                border-style: hidden;
-                                background-color: white;
-                                color: rgb(23, 136, 8);
-                                font-size: 120%;
-                            ">Xóa</button>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row no-gutters confirm-button">
-            <div class="col-12 col-sm-12 d-flex justify-content-center">
-                <button value="" type="" 
-                style="padding: 10px;
-                border-radius: 10px;
-                background-color: rgb(23, 136, 8);
-                color: white; 
-                width: 100%;
-                height: auto;
-                margin: 0px 10px 10px 10px;"
-                >Gửi yêu cầu đặt món 600.000 VND</button> 
+        <div class="row no-gutters pl-3 pr-3">
+            <div class="col-12 backward-button">
+                <h4 class="mb-0"><a href="{{ route('home') }}" class="color-orange"><i class="fas fa-angle-left"></i>
+                        <span>Danh sách món đã chọn</span></a></h4>
             </div>
         </div>
     </div>
+</div>
+<div class="container" style="margin-top: 80px;">
 
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+    @forelse($cartItems as $item)
+    <div class="item-cart d-flex align-items-center shadow-sm mb-3 pt-2 pb-2" data-id="{{ $item->id }}">
+        <div class="col-3">
+            <img src="{{ asset($item->attributes->avatar) }}" alt="" width="100%">
+        </div>
+        <div class="d-flex flex-column col-8">
+            <h5 class="font-weight-bold">{{ $item->name }}</h5>
+            <div class="d-flex">
+                <div class="col-4 item-quantity">
+                    <input type="number" class="form-control" name="item_quantity" placeholder="Số lượng" min="1"
+                        value="{{ $item->quantity }}">
+                </div>
+                <div class="col-8 pr-0 item-size">
+                    <select name="item_size" class="form-control">
+                        <option value="M">M - {{ number_format($item->attributes->price) }} đ</option>
+                        @if($item->attributes->price_large != null)
+                        <option {{ selected($item->attributes->size, 'L') }} value="L">L - {{ number_format($item->attributes->price_large) }} đ</option>
+                        @endif
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-1 pl-0 text-right">
+            <button class="delete-item-cart btn btn-sm btn-outline-danger" data-route="{{ route('delete.cart', $item->id) }}"><i class="fas fa-trash-alt"></i></button>
+        </div>
+    </div>
+    @empty
+    <div class="col-12">
+        <div class="alert alert-warning">
+            <h5 class="text-center">Bạn chưa chọn món nào</h5>
+        </div>
+    </div>
+    @endforelse
+    @if(count($cartItems) > 0)
+    <div class="row">
+        <div class="col">
+            <form id="formOrder" action="{{ route('store.order.user') }}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-block btn-success">Đặt món ăn</button>
+            </form>
+        </div>
+    </div>
+    @else
+    <div class="row">
+        <div class="col">
+        <a class="btn btn-block btn-success">Quay lại</a>
+        </div>
+    </div>
+    @endif
+</div>
+<form id="formUpdateCart" action="{{ route('update.cart') }}" method="post">
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="id">
+    <input type="hidden" name="quantity">
+    <input type="hidden" name="size">
+</form>
+<form id="formDeleteItemCart" action="" method="post">
+    @csrf
+    @method('DELETE')
+</form>
+@endsection

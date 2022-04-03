@@ -13,4 +13,7 @@ class OrderDetail extends Model
     protected $fillable = [
         'order_id', 'name', 'price', 'option', 'quantity', 'quantity_item', 'unit'
     ];
+    protected $attributes = [
+        'unit' => 'set'
+    ];
 }

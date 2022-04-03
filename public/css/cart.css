@@ -1,5 +1,10 @@
+body{
+    color: #333333;
+}
+.color-orange{
+    color: orange;
+}
 .container{
-    background-color: rgb(173, 171, 171);
     font-family: Roboto, sans-serif;
     font-size: 14px;
     padding: 0px;
@@ -9,18 +14,17 @@
     position: fixed;
     left: 0;
     top: 0;
+    height: 70px;
     width: 100%;
     background-color: white;
-    padding: 20px 10px 20px 10px;
     z-index: 2;
+    justify-content: space-between;
+    align-items: center;
 }
 .head>.backward-button{
     display: flex;
-    justify-content: center;
-    padding-top: 5px;
-    background-color: rgb(173, 171, 171);
     border-radius: 5px;
-    color: rgb(23, 136, 8);
+    color: orange;
 }
 .head>.list{
     display: flex;
@@ -43,7 +47,12 @@
 .menu{
     margin: 70px 0px 50px 0px;
 }
-.items{}
+.btn-sm {
+    padding: 0.2rem 0.25rem;
+    font-size: .6rem;
+    line-height: 1;
+    border-radius: 0.2rem;
+}
 .item{
     margin: 10px;
     background-color: white;
