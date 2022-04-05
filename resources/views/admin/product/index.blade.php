@@ -48,7 +48,7 @@
                                 <td><input type="checkbox" class="check-list" name="id[]" value="{{$item->id}}">
                                 </td>
                                 <td>{{$item->name}}</td>
-                                <td>{!! $item->price_large ? number_format($item->price_large).'đ - '.number_format($item->price).'đ' : number_format($item->price).'đ' !!}</td>
+                                <td>{!! $item->price_large ? 'M-'.number_format($item->price).'đ <span class="ml-3"> L-'.number_format($item->price_large).'đ</span>' : number_format($item->price).'đ' !!}</td>
                                 <td>{{$item->quantity.' '.config('mevivu.unit')[$item->unit]}}</td>
                                 <td>{!! status($item->status) !!}</td>
                                 <td>

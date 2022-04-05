@@ -11,10 +11,8 @@
     <div class="card shadow mb-4">
         <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="font-weight-bold text-primary mb-0">Danh sách đơn hàng {{ $status }}</h6>
-            <a href="{{ route('create.order') }}" class="btn btn-sm btn-primary shadow-sm">
-                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                Thêm đơn hàng
-            </a>
+            <a href="{{ route('create.order') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-plus-circle fa-sm text-white-50"></i> Thêm đơn hàng</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

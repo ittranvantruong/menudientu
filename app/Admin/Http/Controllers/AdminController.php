@@ -6,16 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin\Http\Requests\AdminLoginRquest;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Admin;
 
 class AdminController extends Controller
 {
     //
     public function login(){
-        // Admin::create([
-        //     'name' => 'admin',
-        //     'password' => bcrypt('@admin@123')
-        // ]);
         if(auth()->guard('admin')->check()){
             return redirect()->route('admin.index');
         }

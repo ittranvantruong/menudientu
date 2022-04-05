@@ -33,7 +33,9 @@ $(document).on("click", ".add-to-cart", function(){
         }
     });
 });
-
+$('#modalAddToCart').on('hide.bs.modal', function (event) {
+    $("#formAddToCart").trigger("reset");
+  });
 $(document).on("submit", "#formAddToCart", function(e){
     e.preventDefault();
     var form = $(this), action = $(this).attr("action"), cart = $(".cart span.badge"), count = parseInt(cart.data("count")) + parseInt(form.find("input[name='quantity']").val());
@@ -73,7 +75,10 @@ $(document).on("change", "input[name='item_quantity']", function(e){
     size = input.parent('.item-quantity').siblings('.item-size').find("select[name='item_size']").val(), 
     id = input.parents(".item-cart").data("id"), 
     form = $("#formUpdateCart"), action = form.attr("action");
-
+    if(!quantity){
+        quantity = 1;
+        input.val(1);
+    }
     form.find("input[name='id']").val(id);
     form.find("input[name='quantity']").val(quantity);
     form.find("input[name='size']").val(size);
@@ -101,7 +106,10 @@ $(document).on("change", "select[name='item_size']", function(e){
     quantity = input.parent('.item-size').siblings('.item-quantity').find("input[name='item_quantity']").val(), 
     id = input.parents(".item-cart").data("id"), 
     form = $("#formUpdateCart"), action = form.attr("action");
-
+    if(!quantity){
+        quantity = 1;
+        input.val(1);
+    }
     form.find("input[name='id']").val(id);
     form.find("input[name='quantity']").val(quantity);
     form.find("input[name='size']").val(size);

@@ -12,7 +12,7 @@
                 </div>
                 <div class="modal-body row">
                     <div class="col-3">
-                        <input type="number" class="form-control" name="quantity" min="1" value="1">
+                        <input type="number" class="form-control" name="quantity" min="1" required value="1">
                     </div>
                     <div class="col-9">
                         <select class="form-control" required name="size">

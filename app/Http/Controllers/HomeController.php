@@ -20,7 +20,9 @@ class HomeController extends Controller
         return redirect()->route('login');
     }
     public function index(){
-        $categories = Category::select('id', 'name', 'type')->with('product:id,category_id,name,price,price_large,quantity,unit,avatar,desc')->get();
+        $categories = Category::select('id', 'name', 'type')->whereStatus(1)
+        ->with('product:id,category_id,name,price,price_large,quantity,unit,avatar,desc')
+        ->orderBy('sort', 'ASC')->get();
         return view('index',compact('categories'));
     }
 

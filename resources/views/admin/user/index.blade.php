@@ -12,10 +12,8 @@
     <div class="card shadow mb-4">
         <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="font-weight-bold text-primary mb-0">Danh sách bàn</h6>
-            <a href="{{ route('create.user') }}" class="btn btn-sm btn-primary shadow-sm">
-                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                Thêm bàn
-            </a>
+            <a href="{{ route('create.user') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-plus-circle fa-sm text-white-50"></i> Thêm bàn</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

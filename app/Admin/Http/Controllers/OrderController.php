@@ -90,7 +90,7 @@ class OrderController extends Controller
         $order_status = $order->status;
         $order->update(['status' => $status]);
 
-        if($order_status != $data['status']){
+        if($order_status != $status){
 
             $order = $order->load(['details:order_id,name,price,option,quantity,quantity_item,unit']);
             (new AdminRealtimeController)->changeStatusOrder($status, $order_status, $order);
@@ -108,5 +108,10 @@ class OrderController extends Controller
             $total_price += $item->price;
         }
         return response()->json(['html' => $html, 'total_price' => $total_price]);
+    }
+
+    public function delete(Order $order){
+        $order->delete();
+        return redirect()->route('index.order', ['status' => 0])->with('success', 'Xóa thành công');
     }
 }

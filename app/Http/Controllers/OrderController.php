@@ -11,6 +11,9 @@ class OrderController extends Controller
 {
     //
     public function store(Request $request){
+        if(Cart::isEmpty()){
+            return redirect()->route('home')->with('warning', 'Giỏ hàng trống');
+        }
         $cart = Cart::getContent();
         // dd($cart);
         $total =  Cart::getTotal();
