@@ -18,7 +18,7 @@ use App\Http\Controllers\OrderController;
 */
 
 Route::get('dang-nhap', function(){
-    return 'Vui lòng quét mã QRCODE';
+    return 'Please scan the QRCODE';
 })->name('login');
 
 Route::get('dang-nhap/{name}', [HomeController::class, 'userLogin'])->name('user.login');

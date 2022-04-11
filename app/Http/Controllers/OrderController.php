@@ -11,8 +11,9 @@ class OrderController extends Controller
 {
     //
     public function store(Request $request){
+        // dd($request);
         if(Cart::isEmpty()){
-            return redirect()->route('home')->with('warning', 'Giỏ hàng trống');
+            return redirect()->route('home')->with('warning', 'Nothing in cart');
         }
         $cart = Cart::getContent();
         // dd($cart);
@@ -20,6 +21,7 @@ class OrderController extends Controller
         $user = auth()->user();
         $order = Order::create([
             'user_id' => $user->id,
+            'note' => $request->note,
             'total' => $total
         ]);
         if($order){
@@ -38,8 +40,8 @@ class OrderController extends Controller
             (new RealtimeController)->addNewOrder('Có 1 đơn hàng mới được thêm từ '.$user->fullname, $order);
             Cart::clear();
             
-            return redirect()->route('home')->with('success', 'Đặt hàng thành công');
+            return redirect()->route('home')->with('success', 'Success');
         }
-        return back()->with('error', 'Đặt món ăn không thành công');
+        return back()->with('error', 'Failed');
     }
 }

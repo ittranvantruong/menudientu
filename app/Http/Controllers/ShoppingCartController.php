@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\Session;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Http\Requests\CartRequest;
@@ -16,8 +17,9 @@ class ShoppingCartController extends Controller
     public function index(){
         // Cart::clear();
         $cartItems = Cart::getContent();
+        $categories = Category::select();
         // dd($cartItems->total());
-        return view('cart', compact('cartItems'));
+        return view('cart', compact('cartItems','categories'));
     }
 
     public function getProduct(Product $product){
@@ -75,7 +77,7 @@ class ShoppingCartController extends Controller
                 'price_large' => $item->attributes->price_large,
                 'quantity_item' => $item->attributes->quantity,
                 'unit' => $item->attributes->unit,
-
+                
             ]
         ];
         Cart::update($item->id, $array);

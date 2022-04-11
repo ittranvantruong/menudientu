@@ -10,7 +10,7 @@
                 <div class="unit">{{$item1->quantity}} {{$item1->unit}}</div>
                 <div class="d-flex justify-content-between align-items-center">
                     <span>
-                        M - {{number_format($item1->price)}}đ
+                        M - {{number_format($item1->price)}}$
                     </span>
                 </div>
 
@@ -23,7 +23,7 @@
             <div class="col-6 text-right">
             <button value="button" data-route="{{ route('get.product.cart', $item1->id) }}" class="add-to-cart btn btn-sm btn-primary"><i
                         class="fas fa-plus-circle fa-sm text-white-50"></i>
-                    Thêm vào giỏ</button>
+                    Add to cart</button>
             </div>
         </div>
     </div>

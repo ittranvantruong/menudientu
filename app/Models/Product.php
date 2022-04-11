@@ -11,7 +11,12 @@ class Product extends Model
     use HasFactory, Slug;
     protected $table = 'product';
     protected $fillable = [
-        'name', 'category_id', 'slug', 'price', 'price_large', 'quantity', 'unit', 'avatar', 'desc', 'en_desc', 'china_desc', 'status'
+        'name', 
+        'category_id', 
+        'slug', 
+        'price', 
+        'price_large', 
+        'quantity', 'unit', 'avatar', 'desc', 'en_desc', 'china_desc', 'status'
     ];
 
     public static function boot()

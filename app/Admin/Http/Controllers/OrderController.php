@@ -18,9 +18,9 @@ class OrderController extends Controller
     //
     public function index(Request $request){
         $orders = $request->whenFilled('status', function ($input) {
-            return Order::select('id', 'user_id', 'status', 'total')->whereStatus($input)->with(['user:id,fullname', 'details:order_id,name,option,quantity'])->orderBy('id', 'DESC')->get();
+            return Order::select('id', 'user_id', 'status', 'note','total')->whereStatus($input)->with(['user:id,fullname', 'details:order_id,name,option,quantity'])->orderBy('id', 'DESC')->get();
         }, function () {
-            return Order::select('id', 'user_id', 'status', 'total')->with(['user:id,fullname', 'details:order_id,name,option,quantity'])->orderBy('id', 'DESC')->get();
+            return Order::select('id', 'user_id', 'status', 'note','total')->with(['user:id,fullname', 'details:order_id,name,option,quantity'])->orderBy('id', 'DESC')->get();
         });
         $status = orderStatus($request->status);
         $class = orderStatusClass($request->status);
@@ -70,7 +70,7 @@ class OrderController extends Controller
 
         $order = Order::find($request->id);
         $order_status = $order->status;
-        $data = $request->only('user_id', 'status');
+        $data = $request->only('user_id', 'status', 'note');
 
         $order->update($data);
         if($order_status != $data['status']){

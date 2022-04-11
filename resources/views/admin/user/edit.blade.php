@@ -38,6 +38,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="col-lg-12 control-label">URL:</label>
+                                    <div class="row d-flex flex-row">
+                                        <div class="col-lg-9 d-flex ">
+                                        <input readonly class="form-control" type="text" name="url"
+                                            value="{{ route('user.login', $user->name) }}" required id="myURL"
+                                            data-parsley-required-message="Trường này không được bỏ trống.">   
+                                        </div>
+                                        <div class="col-lg-3 ">
+                                            <button onclick="copy()" class="btn btn-outline-secondary" type="button">COPY</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label"></label>
@@ -57,4 +73,18 @@
     @csrf
     @method('DELETE')
 </form>
+
+<script>
+    function copy() {
+  /* Get the text field */
+  var copyText = document.getElementById("myURL");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+   /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText.value);
+}
+</script>
 @endsection
