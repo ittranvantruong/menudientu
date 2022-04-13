@@ -23,6 +23,7 @@
                             <th>Món ăn</th>
                             <th>Tổng tiền</th>
                             <th>Trạng thái</th>
+                            <th>Ghi chú</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
@@ -38,6 +39,7 @@
                             </td>
                             <td>{{ number_format($item->total) }} đ</td>
                             <td>{{ config('mevivu.order.status')[$item->status] }}</td>
+                            <td>{{ $item->note }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                     @if($item->status != 2)
@@ -80,7 +82,7 @@
 
 <script>
     $(document).ready(function (){
-        customDatatable('table', [4]);
+        customDatatable('table', [5]);
     });
     var channel = pusher.subscribe('OrderChangeStatusChannel');
     channel.bind('OrderChangeStatusEvent', function(data) {

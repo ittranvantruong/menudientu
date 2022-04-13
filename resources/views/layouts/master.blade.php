@@ -1,6 +1,6 @@
 @include('layouts.header')
 
-@include('admin.layouts.alert')
+@include('layouts.alert')
 
 @yield('content')
 

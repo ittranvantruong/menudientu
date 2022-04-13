@@ -7,6 +7,7 @@
     </td>
     <td>{{ number_format($item->total) }} đ</td>
     <td>{{ config('mevivu.order.status')[$item->status] }}</td>
+    <td>{{ $item->note }}</td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             @if($item->status != 2)

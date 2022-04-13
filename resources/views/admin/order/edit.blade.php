@@ -72,6 +72,9 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        <div class="form-group">
+                            <textarea name="note" class="form-control" id="exampleFormControlTextarea1" rows="3" >{{ $order->note }}</textarea>
+                          </div>
 
                     </div>
                 </div>

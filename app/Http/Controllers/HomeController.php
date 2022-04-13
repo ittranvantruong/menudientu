@@ -15,7 +15,7 @@ class HomeController extends Controller
 
         if(Auth::attempt(['name' => $name, 'password' => config("mevivu.default-password")])){
 
-            return redirect()->route('home')->with('success', 'Chào mừng bạn đến với nhà hàng !');
+            return redirect()->route('home')->with('success', 'Welcome to the restaurant');
         }
         return redirect()->route('login');
     }
