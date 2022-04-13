@@ -34,4 +34,5 @@ return [
         ],
     ],
     'audio' => '/public/audio/bell.mp3',
+    'currency' => "$"
 ];
