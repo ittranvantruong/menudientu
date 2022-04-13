@@ -58,9 +58,9 @@
                                     @foreach($order->details as $item)
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->quantity }}</td>
-                                    <td>{{ $item->option.' - '.number_format($item->price) }} đ</td>
+                                    <td>{{ $item->option.' - '.number_format($item->price).config('mevivu.currency') }}</td>
                                     <td>{{ $item->quantity_item.' '.config('mevivu.unit')[$item->unit] }}</td>
-                                    <td>{{ number_format($item->price * $item->quantity) }} đ</td>
+                                    <td>{{ number_format($item->price * $item->quantity).config('mevivu.currency') }}</td>
                                 </tr>
                                 @endforeach
 
@@ -68,7 +68,7 @@
                             <tfoot>
                                 <tr>
                                     <th colspan="4">Tổng cộng</th>
-                                    <th class="total-order">{{ number_format($order->total) }} đ</th>
+                                    <th class="total-order">{{ number_format($order->total).config('mevivu.currency') }}</th>
                                 </tr>
                             </tfoot>
                         </table>

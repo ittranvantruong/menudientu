@@ -4,7 +4,7 @@
                 <div class="quick-alo-ph-circle"></div>
                 <div class="quick-alo-ph-circle-fill"></div>
                 <div class="quick-alo-ph-img-circle"
-                    style="text-align: center;color: white;font-size: 80%;padding-top: 18px;">Call staff</div>
+                    style="text-align: center;color: white;font-size: 80%;padding-top: 18px;">{{ __('layout.callStaff') }}</div>
             </div>
         </div>
         <form id="formCallEmployee" action="{{ route('call.employee') }}" method="post">

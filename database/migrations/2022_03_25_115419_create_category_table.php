@@ -19,9 +19,9 @@ class CreateCategoryTable extends Migration
             $table->text('slug');
             // $table->string('en_name')->nullable();
             // $table->string('china_name')->nullable();
-            $table->boolean('type')->defaultValue(0);
-            $table->tinyInteger('sort')->defaultValue(0);
-            $table->boolean('status')->defaultValue(1);
+            $table->boolean('type')->default(0);
+            $table->tinyInteger('sort')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
             $table->index('slug');
         });

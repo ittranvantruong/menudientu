@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->integer('id')->autoIncrement();
             $table->string('name');
             $table->string('fullname');
-            $table->string('role')->defaultValue('NV');
-            $table->tinyInteger('status')->defaultValue('1');
+            $table->string('role')->default('NV');
+            $table->tinyInteger('status')->default('1');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

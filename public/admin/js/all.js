@@ -1,7 +1,8 @@
 //biến golbal
 var urlHome = jQuery('meta[name="url-home"]').attr('content'),
     token = jQuery('meta[name="csrf-token"]').attr('content'),
-    urlAvatar = '/public/sbadmin2/img/undraw_profile.svg';
+    urlAvatar = '/public/sbadmin2/img/undraw_profile.svg',
+    currency = jQuery('meta[name="currency"]').attr('content');
 
 function formatNumber(n) {
     // format number 1000000 to 1,234,567

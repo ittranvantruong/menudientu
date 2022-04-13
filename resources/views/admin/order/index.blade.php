@@ -37,7 +37,7 @@
                                 <p>{{$detail->name.' x '.$detail->quantity.' - '.$detail->option}}</p>
                                 @endforeach
                             </td>
-                            <td>{{ number_format($item->total) }} đ</td>
+                            <td>{{ number_format($item->total).config('mevivu.currency') }}</td>
                             <td>{{ config('mevivu.order.status')[$item->status] }}</td>
                             <td>{{ $item->note }}</td>
                             <td>

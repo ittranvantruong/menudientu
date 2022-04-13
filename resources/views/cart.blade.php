@@ -12,7 +12,7 @@
         <div class="row no-gutters pl-3 pr-3">
             <div class="col-12 backward-button">
                 <h4 class="mb-0"><a href="{{ route('home') }}" class="color-orange"><i class="fas fa-angle-left"></i>
-                        <span>Back to menu</span></a></h4>
+                        <span>{{ __('layout.backToMenu') }}</span></a></h4>
             </div>
         </div>
     </div>
@@ -33,9 +33,9 @@
                 </div>
                 <div class="col-8 pr-0 item-size">
                     <select name="item_size" class="form-control">
-                        <option value="M">M - {{ number_format($item->attributes->price) }} $</option>
+                        <option value="M">M - {{ number_format($item->attributes->price) }}{{ config('mevivu.currency') }}</option>
                         @if($item->attributes->price_large != null)
-                        <option {{ selected($item->attributes->size, 'L') }} value="L">L - {{ number_format($item->attributes->price_large) }} $</option>
+                        <option {{ selected($item->attributes->size, 'L') }} value="L">L - {{ number_format($item->attributes->price_large) }}{{ config('mevivu.currency') }}</option>
                         @endif
                     </select>
                 </div>
@@ -48,7 +48,7 @@
     @empty
     <div class="col-12">
         <div class="alert alert-warning">
-            <h5 class="text-center">Nothing in cart</h5>
+            <h5 class="text-center">{{ __('layout.nothing') }}</h5>
         </div>
     </div>
     @endforelse
@@ -58,16 +58,16 @@
             <form id="formOrder" action="{{ route('store.order.user') }}" method="post">
                 @csrf
                 <div class="form-group">
-                    <textarea name="note" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Note ..."></textarea>
+                    <textarea name="note" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="{{ __('layout.note') }} ..."></textarea>
                   </div>
-                <button type="submit" class="btn btn-block btn-success">Order</button>
+                <button type="submit" class="btn btn-block btn-success">{{ __('layout.order') }}</button>
             </form>
         </div>
     </div>
     @else
     <div class="row">
         <div class="col">
-        <a class="btn btn-block btn-success">Order</a>
+        <a href="{{ route('home') }}" class="btn btn-block btn-success">{{ __('layout.backToMenu') }}</a>
         </div>
     </div>
     @endif

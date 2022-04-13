@@ -32,13 +32,13 @@
     </td>
     <td>
         <select name="price[]" class="form-control">
-            <option value="{{ $item->price }}">M - {{ number_format($item->price) }}đ</option>
+            <option value="{{ $item->price }}">M - {{ number_format($item->price).config('mevivu.currency') }}</option>
             @if($item->price_large != null && $item->price_large != '')
-                <option value="{{ $item->price_large }}">L - {{ number_format($item->price_large) }}đ</option>
+                <option value="{{ $item->price_large }}">L - {{ number_format($item->price_large).config('mevivu.currency') }}</option>
             @endif
         </select>
     </td>
     <td>{{ $item->quantity.' '.config('mevivu.unit')[$item->unit] }}</td>
-    <td>{{ number_format($item->price) }}đ</td>
+    <td>{{ number_format($item->price).config('mevivu.currency') }}</td>
 </tr>
 @endif

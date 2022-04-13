@@ -10,6 +10,8 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="url-home" content="{{ url('/') }}" />
+    <meta name="currency" content="{{ config('mevivu.currency') }}">
+
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset(config('mevivu.images.shortcut-icon')) }}" />
     <title>@yield('title')</title>
 

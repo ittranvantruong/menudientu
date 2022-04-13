@@ -19,7 +19,7 @@ class CreateOrderDetailTable extends Migration
             $table->text('name');
             $table->double('price');
             $table->char('option');
-            $table->integer('quantity')->defaultValue(1);
+            $table->integer('quantity')->default(1);
             $table->float('quantity_item')->nullable();
             $table->char('unit')->nullable();
             $table->timestamps();

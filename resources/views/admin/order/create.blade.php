@@ -65,7 +65,7 @@
                             <tfoot>
                                 <tr>
                                     <th colspan="5">Tổng cộng</th>
-                                    <th class="total-order">0đ</th>
+                                    <th class="total-order">0{{ config('mevivu.currency') }}</th>
                                 </tr>
                             </tfoot>
                         </table>

@@ -44,7 +44,7 @@ $(document).on('click', '#choosProduct', function(e) {
         preview.find('.default').remove();
         preview.append(response.html);
         target.prop('checked', false);
-        $(".total-order").html(formatNumber(getTotalPrice('table.product-order tbody tr')) + 'đ');
+        $(".total-order").html(formatNumber(getTotalPrice('table.product-order tbody tr')) + currency);
     }).fail(function(response) {
         $.toast({
             heading: 'Thất bại',
@@ -72,8 +72,8 @@ $(document).on('change', 'input[name="quantity[]"]', function(e) {
     price = $(that.parent('td').next()).find('select[name="price[]"]').val(), quantity = that.val(), 
     parent = $(that.parents('tr'));
     
-    parent.find('td:last-child').html(formatNumber(price * quantity) + 'đ');
-    $(".total-order").html(formatNumber(getTotalPrice('table.product-order tbody tr')) + 'đ');
+    parent.find('td:last-child').html(formatNumber(price * quantity) + currency);
+    $(".total-order").html(formatNumber(getTotalPrice('table.product-order tbody tr')) + currency);
 
 })
 
@@ -83,14 +83,14 @@ $(document).on('change', 'select[name="price[]"]', function(e) {
     price = that.val(), 
     parent = $(that.parents('tr'));
     
-    parent.find('td:last-child').html(formatNumber(quantity * price) + 'đ');
+    parent.find('td:last-child').html(formatNumber(quantity * price) + currency);
 
-    $(".total-order").html(formatNumber(getTotalPrice('table.product-order tbody tr')) + 'đ');
+    $(".total-order").html(formatNumber(getTotalPrice('table.product-order tbody tr')) + currency);
 });
 $(document).on('click', '.remove-product-order', function(e) {
     var that = $(this), parent = that.parents('tr');
     parent.remove();
     
-    $(".total-order").html(formatNumber(getTotalPrice('table.product-order tbody tr')) + 'đ');
+    $(".total-order").html(formatNumber(getTotalPrice('table.product-order tbody tr')) + currency);
 })
 
